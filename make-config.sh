@@ -1,6 +1,6 @@
-cat <<END >sigaev-com-config.sh
+cat <<END
 sudo yum -y update
-sudo yum -y install httpd patch
+sudo yum -y install git httpd patch
 chmod 755 .
 mkdir www
 sudo patch -d/ -p1 <<EOF
