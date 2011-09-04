@@ -1,8 +1,8 @@
 cat <<END
 sudo yum -y update
 sudo yum -y install git httpd
-chmod 755 .
 mkdir www
+chmod 755 . www
 
 (
 	umask 077
