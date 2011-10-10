@@ -1,4 +1,3 @@
-cat <<END
 sudo yum -y update
 sudo yum -y install git httpd
 mkdir www
@@ -15,11 +14,13 @@ chmod 755 . www
 EOF
 )
 
-sudo git apply --directory=/ <<EOF
-`git diff master...patch`
-EOF
+git clone http://sigaev.com/etc/www/.git a
+(
+	cd a
+	git diff origin/master...origin/patch | sudo git apply --directory=/
+)
+rm -fr a
 
 sudo /sbin/chkconfig httpd on
 sudo /sbin/service httpd start
 ssh-keygen -t rsa -N '' -f .ssh/id_rsa
-END
