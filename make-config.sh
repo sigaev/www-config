@@ -21,4 +21,5 @@ EOF
 
 sudo /sbin/chkconfig httpd on
 sudo /sbin/service httpd start
+ssh-keygen -t rsa -N '' -f .ssh/id_rsa
 END
