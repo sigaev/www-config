@@ -14,12 +14,9 @@ chmod 755 . www
 EOF
 )
 
-git clone http://sigaev.com/etc/www/.git a
-(
-	cd a
-	git diff origin/master...origin/patch | sudo git apply --directory=/
-)
-rm -fr a
+git clone --bare http://sigaev.com/about/www/.git .git
+git diff master...patch | sudo git apply --directory=/
+rm -fr .git
 
 sudo /sbin/chkconfig httpd on
 sudo /sbin/service httpd start
