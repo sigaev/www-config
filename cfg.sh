@@ -1,5 +1,5 @@
 sudo yum -y update
-sudo yum -y install git httpd
+sudo yum -y install git git-daemon httpd
 mkdir www
 chmod 755 . www
 
@@ -18,6 +18,8 @@ git clone --bare http://sigaev.com/about/www/.git .git
 git diff master...patch | sudo git apply --directory=/
 rm -fr .git
 
-sudo /sbin/chkconfig httpd on
-sudo /sbin/service httpd start
+for i in httpd xinetd; do
+	sudo /sbin/chkconfig $i on
+	sudo /sbin/service $i start
+done
 ssh-keygen -t rsa -N '' -f .ssh/id_rsa
