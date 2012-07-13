@@ -23,3 +23,7 @@ for i in httpd xinetd; do
 	sudo /sbin/service $i start
 done
 ssh-keygen -t rsa -N '' -f .ssh/id_rsa
+crontab - <<EOF
+MAILTO=cron-atzcbnbqggm8fayd@sigaev.com
+15 6,18 * * * ~/www/about/www/cron-portage-update
+EOF
