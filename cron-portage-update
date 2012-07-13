@@ -1,4 +1,7 @@
 #!/bin/bash
 
-echo Hello
-touch /mnt/portage.tgz
+cd /mnt/portage
+git pull
+cd ..
+tar czf portage.tgz- --{owner,group}=250 --exclude=portage/.git\* portage
+exec mv portage.tgz{-,}
