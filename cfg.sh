@@ -17,8 +17,8 @@ chmod 755 . www
 EOF
 )
 
-git clone --bare http://sigaev.com/about/www/.git .git
-git diff master...patch | sudo git apply --directory=/
+git clone --bare git://sigaev.com/about/www .git
+git diff master...patch | sudo git apply -v --directory=/
 rm -fr .git
 
 for i in httpd xinetd; do
