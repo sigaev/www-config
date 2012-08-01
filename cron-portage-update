@@ -1,9 +1,0 @@
-#!/bin/bash
-
-cd /mnt/portage
-h=`git rev-list -n1 HEAD`
-git pull -q || exit 1
-[[ $h == `git rev-list -n1 HEAD` ]] && exit 0
-cd ..
-tar czf portage.tgz- --{owner,group}=250 --exclude=portage/.git\* portage || exit 1
-exec mv portage.tgz{-,}
