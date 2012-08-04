@@ -1,5 +1,5 @@
 sudo yum -y update
-sudo yum -y install git git-daemon httpd
+sudo yum -y install git git-daemon httpd make
 mkdir www
 chmod 755 . www
 
@@ -17,9 +17,13 @@ chmod 755 . www
 EOF
 )
 
-git clone --bare git://sigaev.com/about/www .git
+git clone --bare git://github.com/sigaev/www-config .git
 git diff master...patch | sudo git apply -v --directory=/
-rm -fr .git
+git clone git://github.com/sigaev/aws aws
+cd aws
+sudo make
+cd
+rm -fr .git aws
 
 for i in httpd xinetd; do
 	sudo /sbin/chkconfig $i on
