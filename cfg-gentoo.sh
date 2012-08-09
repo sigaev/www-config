@@ -40,7 +40,7 @@ mv etc/ssh/ssh_host_* mnt/etc/ssh/
 rm -fr mnt/{dev,proc,sys,mnt} \`ls | egrep -v 'lost.found|dev|proc|sys|mnt'\`
 mnt/lib/ld-2* --library-path mnt/lib mnt/bin/mv mnt/* .
 
-echo Starting \[init "\$@"\] >&2
+echo Starting \\[init "\$@"\\] >&2
 exec sbin/init "\$@"
 EOF
 
