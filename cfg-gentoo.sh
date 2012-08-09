@@ -47,4 +47,4 @@ EOF
 
 chmod 755 media/init
 mv -bf media/init sbin/
-reboot
+setsid nohup sh -c 'sleep 3 && reboot &' </dev/null >/dev/null 2>&1
