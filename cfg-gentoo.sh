@@ -26,11 +26,10 @@ else
 	old "\$@"
 fi
 
-if [[ ! -e $1 ]]; then
+if [[ ! -h mnt/lib/modules ]]; then
 	echo FATAL: previous attempt to move Gentoo files failed >&2
 	exit 1
 fi
-rm -f $1
 
 mount -nworemount .
 rm -f mnt/lib/modules
