@@ -1,3 +1,5 @@
+# run as ec2-user
+
 sudo yum -y update
 sudo yum -y install git git-daemon httpd make
 mkdir www
