@@ -8,6 +8,10 @@ wget -qO- s3.amazonaws.com/sigaev/linux/unsquashfs.txz | tar xJC media || exit 1
 media/lib/ld-2* --library-path media/lib:media/usr/lib \
 	media/usr/bin/unsquashfs -f -d mnt $1 || exit 1
 
+sed -i "s,\"$,-`hostname`\"," mnt/etc/conf.d/hostname
+# disable SELinux, otherwise the instance won't be able to reboot
+sed -i '/kernel/s,$, selinux=0,' boot/grub/grub.conf
+
 cat >media/init <<EOF
 #!/bin/bash
 
@@ -41,13 +45,10 @@ chown 1000 dev/shm/.awssecret
 rm -fr mnt/{boot,dev,proc,sys,mnt} \`ls | egrep -v 'lost.found|boot|dev|proc|sys|mnt'\`
 mnt/lib/ld-2* --library-path mnt/lib mnt/bin/mv mnt/* .
 
-# disable SELinux, otherwise the instance won't be able to reboot
-sed -i '/kernel/s,\$, selinux=0,' boot/grub/grub.conf
-
 echo Starting \\[init "\$@"\\] >&2
 exec sbin/init "\$@"
 EOF
-
 chmod 755 media/init
 mv -bf media/init sbin/
+
 setsid nohup sh -c 'sleep 3 && reboot &' </dev/null >/dev/null 2>&1
