@@ -38,7 +38,7 @@ mv etc/ssh/ssh_host_* mnt/etc/ssh/
 mv home/ec2-user/.awssecret dev/shm/
 chown 1000 dev/shm/.awssecret
 
-rm -fr mnt/{dev,proc,sys,mnt} \`ls | egrep -v 'lost.found|dev|proc|sys|mnt'\`
+rm -fr mnt/{boot,dev,proc,sys,mnt} \`ls | egrep -v 'lost.found|boot|dev|proc|sys|mnt'\`
 mnt/lib/ld-2* --library-path mnt/lib mnt/bin/mv mnt/* .
 
 echo Starting \\[init "\$@"\\] >&2
