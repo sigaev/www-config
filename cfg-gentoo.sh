@@ -41,6 +41,9 @@ chown 1000 dev/shm/.awssecret
 rm -fr mnt/{boot,dev,proc,sys,mnt} \`ls | egrep -v 'lost.found|boot|dev|proc|sys|mnt'\`
 mnt/lib/ld-2* --library-path mnt/lib mnt/bin/mv mnt/* .
 
+# disable SELinux, otherwise the instance won't be able to reboot
+sed -i '/kernel/s,\$, selinux=0,' boot/grub/grub.conf
+
 echo Starting \\[init "\$@"\\] >&2
 exec sbin/init "\$@"
 EOF
