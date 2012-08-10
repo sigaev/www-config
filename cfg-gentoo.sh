@@ -8,6 +8,7 @@ wget -qO- s3.amazonaws.com/sigaev/linux/unsquashfs.txz | tar xJC media || exit 1
 media/lib/ld-2* --library-path media/lib:media/usr/lib \
 	media/usr/bin/unsquashfs -f -d mnt $1 || exit 1
 
+sed -i s,Bs3,Bhttp://s3, mnt/etc/init.d/last
 sed -i "s,\"$,-`hostname`\"," mnt/etc/conf.d/hostname
 # disable SELinux, otherwise the instance won't be able to reboot
 sed -i '/kernel/s,$, selinux=0,' boot/grub/grub.conf
